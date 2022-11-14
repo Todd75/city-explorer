@@ -8,40 +8,27 @@ class App extends React.Component {
     this.state = {
       city: '',
       cityData: {},
-      value: '',
-
-
+      errorMessage: '',
+      isError: false,
     }
   }
 
-
-
-  handleSubmit = async (event) => {
-    event.preventDefault();
-    let apiData = await axios.get('API URL HERE');
-    console.log(apiData.data.results)
-    this.setState({
-      apiData: apiData.data.results
-    });
-  }
   handleCityInput = (event) => {
     this.setState({
       city: event.target.value
     });
   };
-  handleInputChange = (event) => {
-    this.setState({
-      city: event.target.value
-    });
-  };
+
   handleCitySubmit = async (event) => {
     event.preventDefault();
     let url = ''
     try {
       event.preventDefault();
       let locationInfo = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`);
-
-      console.log(locationInfo.data[0]); //return first value in array
+      this.setState({
+        cityData: locationInfo.data[0],
+        isError: false,
+      });
 
     } catch (error) {
       console.log('error', error);
@@ -51,37 +38,34 @@ class App extends React.Component {
         isError: true
       })
     }
-    render() {
+  }
+  render() {
 
-      let apiChar = this.state.apiData.map((character, idx) => {
-        return <li key={idx}>{character.name}</li>
-      });
+    let apiItems = this.state.cityData.map((city, idx) => {
+      return <li key={idx}>{city.name}</li>
+    });
 
-      return (
-        <>
-          <h1>Data from Api</h1>
-          <form onSubmit={this.handleCitySubmit}>
-            <button type="submit">Display</button>
-          </form>
-          {
-            this.state.isError
-              ? <p>{this.state.errorMessage}</p>
-              : '',
-            { apiChar }
-          }
-          <ul>
-            {apiChar}
-          </ul>
-          <form>
-            <label>Pick a City</label>
-            <input type="text" name="city" onChange={this.handleCityInput}></input>
+    return (
+      <>
+        <h1>Hi</h1>
+        <form onSubmit={this.handleCitySubmit}>
+          <label>
+            <input name='city' type='text' onChange={this.handleCityInput} />
+          </label>
+          <button type="submit">Explore</button>
+        </form>
+        {this.state.isError ? <p>{this.state.errorMessage}</p> : <ul>
+          {apiItems}
+        </ul>
+        }
 
-          </form>
+      </>
+    );
+  }
+};
 
-        </>
-      )}
-    };
-  };
+
+export default App;
 // render() {
 //   return (
 //     <>
@@ -97,7 +81,7 @@ class App extends React.Component {
 // }
 
 
-export default App;
+
 
 // handleSubmit = async (event) => {
 //   event.preventDefault();
@@ -164,4 +148,17 @@ export default App;
   //   this.setState await {
   //     city: event.target.city.value;
   //   };
+  // }
+   // handleInputChange = (event) => {
+  //   this.setState({
+  //     city: event.target.value
+  //   });
+  // };
+  // handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   let apiData = await axios.get('API URL HERE');
+  //   console.log(apiData.data.results)
+  //   this.setState({
+  //     apiData: apiData.data.results
+  //   });
   // }
