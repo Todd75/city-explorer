@@ -41,7 +41,13 @@ class App extends React.Component {
 
     let display = '';
     if(this.state.isError) {
-      display=<p></p>
+      display=<p>{this.state.errorMessage}</p>
+    } else {
+      display = <ul>
+        <li>City: {this.state.cityData.display_name}</li>
+        <li>Latitude: {this.state.cityData.lat}</li>
+        <li>Longitude: {this.state.cityData.lon}</li>
+      </ul>
     }
     
 
