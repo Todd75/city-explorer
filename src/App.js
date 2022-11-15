@@ -58,7 +58,7 @@ class Apps extends React.Component {
 
     return (
       <><header id="topHeader">
-        <h1 id='greeting'>City Explorer</h1>
+        <h1 id='greeting' title="404">City Explorer</h1>
       </header>
         <main>
           <form id="cityForm" onSubmit={this.handleCitySubmit}>
@@ -69,7 +69,7 @@ class Apps extends React.Component {
           </form>
           {/* {display} */}
           {/* <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`} alt={this.state.cityData.display_name} /> */}
-          {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Oh No There is an Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>}
+          {this.state.isError ? <Alert id="alertDiv" className="alert" variant="danger"><Alert.Heading>Oh No There is an Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>}
           <Modal show={this.state.showModal} onHide={this.handleCloseModal} size="lg" className="modal" centered>
             <Modal.Header>
               <Modal.Title>
@@ -83,6 +83,8 @@ class Apps extends React.Component {
                   alt={this.state.city.name}
                 />
               </div>
+              <p className="descriptionModal">Latitude: {this.state.cityData.lat}</p>
+              <p className="descriptionModal">Longitude: {this.state.cityData.lon}</p>
             </Modal.Body>
             <Modal.Footer>
               <Button variant="primary" onClick={this.handleCloseModal}>Finished</Button>
