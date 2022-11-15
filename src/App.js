@@ -70,7 +70,7 @@ class Apps extends React.Component {
           {/* {display} */}
           {/* <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`} alt={this.state.cityData.display_name} /> */}
           {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Oh No There is an Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>}
-          <Modal show={this.state.showModal} onHide={this.handleCloseModal}>
+          <Modal show={this.state.showModal} onHide={this.handleCloseModal} size="lg" className="modal" centered>
             <Modal.Header>
               <Modal.Title>
                 {this.state.cityData.display_name}
