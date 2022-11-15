@@ -5,8 +5,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert';
 // eslint-disable-next-line no-unused-vars
 import App from './App.css';
-// import Modal from 'react-bootstrap/Modal'
-// import Button from 'react-bootstrap/Button'
+import Modal from 'react-bootstrap/Modal'
+import Button from 'react-bootstrap/Button'
 
 
 class Apps extends React.Component {
@@ -17,6 +17,7 @@ class Apps extends React.Component {
       cityData: {},
       errorMessage: '',
       isError: false,
+      showModal: false,
     }
   }
 
@@ -36,6 +37,7 @@ class Apps extends React.Component {
       this.setState({
         cityData: locationInfo.data[0],
         isError: false,
+        showModal: true,
       });
 
     } catch (error) {
@@ -47,39 +49,46 @@ class Apps extends React.Component {
   }
   handleCloseModal = () => {
     this.setState({
-      isModalShown: false,
+      showModal: false,
     })
   }
   render() {
 
-    let display = '';
-    if (this.state.isError) {
-      display = <p>{this.state.errorMessage}</p>
-    } else {
-      display = <ul id="cityLatLon">
-        <li id="listedCity">City: {this.state.cityData.display_name}</li>
-        <li id="listedLon">Latitude: {this.state.cityData.lat}</li>
-        <li id="listedLat">Longitude: {this.state.cityData.lon}</li>
-      </ul>
-    }
-
+    let mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`;
 
     return (
-      <>
+      <><header id="topHeader">
         <h1 id='greeting'>City Explorer</h1>
-        <form onSubmit={this.handleCitySubmit}>
-          <label>
-            <input name='city' type='text' onChange={this.handleCityInput} placeholder="Please Search for a City" id="inputId"/>
-          </label>
-          <button type="submit" id="inputIdBtn">Explore</button>
-        </form>
-        {this.state.isError ? <p>{this.state.errorMessage}</p> : <ul>
-
-        </ul>}
-        {display}
-        <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`} alt={this.state.cityData.display_name} />
-        {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Oh No There is an Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>}
-
+      </header>
+        <main>
+          <form id="cityForm" onSubmit={this.handleCitySubmit}>
+            <label>
+              <input name='city' type='text' onChange={this.handleCityInput} placeholder="Please Search for a City" id="inputId" />
+            </label>
+            <button type="submit" id="inputIdBtn">Explore</button>
+          </form>
+          {/* {display} */}
+          {/* <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`} alt={this.state.cityData.display_name} /> */}
+          {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Oh No There is an Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>}
+          <Modal show={this.state.showModal} onHide={this.handleCloseModal}>
+            <Modal.Header>
+              <Modal.Title>
+                {this.state.cityData.display_name}
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body id="modalbody">
+              <div>
+                <img className="modaling"
+                  src={mapUrl}
+                  alt={this.state.city.name}
+                />
+              </div>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="primary" onClick={this.handleCloseModal}>Finished</Button>
+            </Modal.Footer>
+          </Modal>
+        </main>
       </>
 
     );
@@ -194,3 +203,14 @@ export default Apps;
   //     apiData: apiData.data.results
   //   });
   // }
+
+  // let display = '';
+    // if (this.state.isError) {
+    //   display = <p>{this.state.errorMessage}</p>
+    // } else {
+    //   display = <ul id="cityLatLon">
+    //     <li id="listedCity">City: {this.state.cityData.display_name}</li>
+    //     <li id="listedLon">Latitude: {this.state.cityData.lat}</li>
+    //     <li id="listedLat">Longitude: {this.state.cityData.lon}</li>
+    //   </ul>
+    // }

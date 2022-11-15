@@ -2,11 +2,13 @@
 
 ## Todd Wolden
 
+## Version 1.0
+
 ## Overview
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
 
 ## Getting Started
-<!-- What are the steps that a user must take in order to build this app on their own machine and get it running? -->
+
 
 ## Architecture
 <!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
@@ -17,6 +19,9 @@
 01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 
 ## Credit and Collaborations
+
+1. Worked with Cody on the first dataFlow image.
+2. TA help from Brandon and Justin
 
 Name of feature: Initial Website with return of city from api data
 
