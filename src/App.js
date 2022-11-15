@@ -1,5 +1,9 @@
 import axios from 'axios';
 import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import Alert from 'react-bootstrap/Alert'
+// import Modal from 'react-bootstrap/Modal'
+// import Button from 'react-bootstrap/Button'
 
 
 class App extends React.Component {
@@ -20,11 +24,12 @@ class App extends React.Component {
   };
 
   handleCitySubmit = async (event) => {
-    event.preventDefault();
-    // let url = ''
+
+    let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`;
     try {
       event.preventDefault();
-      let locationInfo = await axios.get(`https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`);
+      let locationInfo = await axios.get(url);
+
       this.setState({
         cityData: locationInfo.data[0],
         isError: false,
@@ -40,8 +45,8 @@ class App extends React.Component {
   render() {
 
     let display = '';
-    if(this.state.isError) {
-      display=<p>{this.state.errorMessage}</p>
+    if (this.state.isError) {
+      display = <p>{this.state.errorMessage}</p>
     } else {
       display = <ul>
         <li>City: {this.state.cityData.display_name}</li>
@@ -49,11 +54,11 @@ class App extends React.Component {
         <li>Longitude: {this.state.cityData.lon}</li>
       </ul>
     }
-    
+
 
     return (
       <>
-        <h1>Hi</h1>
+        <h1>Hi There</h1>
         <form onSubmit={this.handleCitySubmit}>
           <label>
             <input name='city' type='text' onChange={this.handleCityInput} placeholder="Please Search for a City" />
@@ -61,18 +66,28 @@ class App extends React.Component {
           <button type="submit">Explore</button>
         </form>
         {this.state.isError ? <p>{this.state.errorMessage}</p> : <ul>
-          {/* {apiItems} */}
+
         </ul>}
         {display}
+        <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`} alt={this.state.cityData.display_name} />
       </>
-        
 
-      
     );
-}
+  }
 };
 
 export default App;
+
+
+
+
+
+
+
+
+
+
+
 // render() {
 //   return (
 //     <>
