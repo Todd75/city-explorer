@@ -1,7 +1,8 @@
 import axios from 'axios';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Alert from 'react-bootstrap/Alert'
+import Alert from 'react-bootstrap/Alert';
+import Apps from './Apps.css';
 // import Modal from 'react-bootstrap/Modal'
 // import Button from 'react-bootstrap/Button'
 
@@ -42,28 +43,33 @@ class App extends React.Component {
       })
     }
   }
+  handleCloseModal = () => {
+    this.setState({
+      isModalShown: false,
+    })
+  }
   render() {
 
     let display = '';
     if (this.state.isError) {
       display = <p>{this.state.errorMessage}</p>
     } else {
-      display = <ul>
-        <li>City: {this.state.cityData.display_name}</li>
-        <li>Latitude: {this.state.cityData.lat}</li>
-        <li>Longitude: {this.state.cityData.lon}</li>
+      display = <ul id="cityLatLon">
+        <li id="listedCity">City: {this.state.cityData.display_name}</li>
+        <li id="listedLon">Latitude: {this.state.cityData.lat}</li>
+        <li id="listedLat">Longitude: {this.state.cityData.lon}</li>
       </ul>
     }
 
 
     return (
       <>
-        <h1>Hi There</h1>
+        <h1 id='greeting'>City Explorer</h1>
         <form onSubmit={this.handleCitySubmit}>
           <label>
-            <input name='city' type='text' onChange={this.handleCityInput} placeholder="Please Search for a City" />
+            <input name='city' type='text' onChange={this.handleCityInput} placeholder="Please Search for a City" id="inputId"/>
           </label>
-          <button type="submit">Explore</button>
+          <button type="submit" id="inputIdBtn">Explore</button>
         </form>
         {this.state.isError ? <p>{this.state.errorMessage}</p> : <ul>
 
@@ -71,6 +77,7 @@ class App extends React.Component {
         {display}
         <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`} alt={this.state.cityData.display_name} />
         {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Oh No There is an Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>}
+
       </>
 
     );

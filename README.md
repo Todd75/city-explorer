@@ -18,15 +18,14 @@
 
 ## Credit and Collaborations
 
-Name of feature:
+Name of feature: Initial Website with return of city from api data
 
-Estimate of time needed to complete:
+Estimate of time needed to complete: 4 hours
 
-Start time:
+Start time: 2:30
 
-Finish time:
+Finish time: 6:30
 
-Actual time needed to complete:
+Actual time needed to complete: about 4 hours
 
-![DataFlow](src/dataflow.png)
-
+![dataFlow](src/dataflow.png)
