@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import Alert from 'react-bootstrap/Alert'
+import Alert from 'react-bootstrap/Alert'
 // import Modal from 'react-bootstrap/Modal'
 // import Button from 'react-bootstrap/Button'
 
@@ -70,6 +70,7 @@ class App extends React.Component {
         </ul>}
         {display}
         <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`} alt={this.state.cityData.display_name} />
+        {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Oh No There is an Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>}
       </>
 
     );
