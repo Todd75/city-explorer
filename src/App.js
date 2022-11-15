@@ -1,13 +1,15 @@
+
 import axios from 'axios';
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert';
-import Apps from './Apps.css';
+// eslint-disable-next-line no-unused-vars
+import App from './App.css';
 // import Modal from 'react-bootstrap/Modal'
 // import Button from 'react-bootstrap/Button'
 
 
-class App extends React.Component {
+class Apps extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -84,7 +86,7 @@ class App extends React.Component {
   }
 };
 
-export default App;
+export default Apps;
 
 
 
