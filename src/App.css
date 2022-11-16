@@ -259,3 +259,9 @@ body {
   margin-top: 6px;
   font-weight: 500;
 }
+footer {
+  text-align: center;
+}
+main {
+  height: 85vh;
+}

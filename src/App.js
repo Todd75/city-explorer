@@ -21,6 +21,12 @@ class Apps extends React.Component {
     }
   }
 
+  handleWeather = async () => {
+    let url = `${process.env.REACT_APP_SERVER}/weather?city=${this.state.city}`;
+    let cityData = await axios.get(url);
+    console.log(cityData.data)
+  }
+
   handleCityInput = (event) => {
     this.setState({
       city: event.target.value
@@ -91,6 +97,9 @@ class Apps extends React.Component {
             </Modal.Footer>
           </Modal>
         </main>
+        <footer>
+          <h5>&copy; TCW, 2022</h5>
+        </footer>
       </>
 
     );
