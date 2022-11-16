@@ -1,12 +1,14 @@
-
+import React, {CCardImage, CCardBody, CCardText, CCardTitle} from 'react';
+import CCard from 'react-bootstrap/Card';
+// import React, {CCardImage, CCardBody, CCardText, CCardTitle} from 'react-bootstrap';
 import axios from 'axios';
-import React from 'react';
+import Bootstrap from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert';
 // eslint-disable-next-line no-unused-vars
 import App from './App.css';
-import Modal from 'react-bootstrap/Modal'
-import Button from 'react-bootstrap/Button'
+// import Modal from 'react-bootstrap/Modal'
+import CButton from 'react-bootstrap/Button'
 
 
 class Apps extends React.Component {
@@ -15,17 +17,14 @@ class Apps extends React.Component {
     this.state = {
       city: '',
       cityData: {},
+      forecast: [],
       errorMessage: '',
       isError: false,
       showModal: false,
     }
   }
 
-  handleWeather = async () => {
-    let url = `${process.env.REACT_APP_SERVER}/weather?city=${this.state.city}`;
-    let cityData = await axios.get(url);
-    console.log(cityData.data)
-  }
+
 
   handleCityInput = (event) => {
     this.setState({
@@ -73,29 +72,20 @@ class Apps extends React.Component {
             </label>
             <button type="submit" id="inputIdBtn">Explore</button>
           </form>
-          {/* {display} */}
-          {/* <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`} alt={this.state.cityData.display_name} /> */}
+          {/* {display}
+          <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`} alt={this.state.cityData.display_name} /> */}
           {this.state.isError ? <Alert id="alertDiv" className="alert" variant="danger"><Alert.Heading>Oh No There is an Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>}
-          <Modal show={this.state.showModal} onHide={this.handleCloseModal} size="lg" className="modal" centered>
-            <Modal.Header>
-              <Modal.Title>
-                {this.state.cityData.display_name}
-              </Modal.Title>
-            </Modal.Header>
-            <Modal.Body id="modalbody">
-              <div>
-                <img className="modaling"
-                  src={mapUrl}
-                  alt={this.state.city.name}
-                />
-              </div>
-              <p className="descriptionModal">Latitude: {this.state.cityData.lat}</p>
-              <p className="descriptionModal">Longitude: {this.state.cityData.lon}</p>
-            </Modal.Body>
-            <Modal.Footer>
-              <Button variant="primary" onClick={this.handleCloseModal}>Finished</Button>
-            </Modal.Footer>
-          </Modal>
+          <CCard style={{ width: '18rem' }}>
+            <CCardImage orientation='top' src={mapUrl} id='cardImageMap'/>
+            <CCardBody>
+              <CCardTitle>{this.state.cityData.display_name}</CCardTitle>
+              <CCardText>
+                Latitude: {this.state.cityData.lat}
+                Longitude: {this.state.cityData.lon}
+              </CCardText>
+              <CButton href="#">View Stuff</CButton>
+            </CCardBody>
+          </CCard>
         </main>
         <footer>
           <h5>&copy; TCW, 2022</h5>
@@ -109,7 +99,26 @@ class Apps extends React.Component {
 export default Apps;
 
 
-
+// {/* <Modal show={this.state.showModal} onHide={this.handleCloseModal} size="lg" className="modal" centered>
+//             <Modal.Header>
+//               <Modal.Title>
+//                 
+//               </Modal.Title>
+//             </Modal.Header>
+//             <Modal.Body id="modalbody">
+//               <div>
+//                 <img className="modaling"
+//                   src={mapUrl}
+//                   alt={this.state.city.name}
+//                 />
+//               </div>
+//               <p className="descriptionModal">Latitude: {this.state.cityData.lat}</p>
+//               <p className="descriptionModal">Longitude: {this.state.cityData.lon}</p>
+//             </Modal.Body>
+//             <Modal.Footer>
+//               <Button variant="primary" onClick={this.handleCloseModal}>Finished</Button>
+//             </Modal.Footer>
+//           </Modal> */}
 
 
 
