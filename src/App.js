@@ -14,13 +14,11 @@ class Apps extends React.Component {
       errorMessage: '',
       isError: false,
       weatherData: [],
+      showImages: false,
     
 
     }
   }
-
-
-
   handleCityInput = (event) => {
     this.setState({
       city: event.target.value,
@@ -52,67 +50,55 @@ class Apps extends React.Component {
   }
 
   handleWeather = async () => {
-    // axios.get(`http://localhost:3002/weather?city=${this.state.city}`)
-    //   .then(weatherData => {
-    //     console.log(weatherData);
-    //     this.setState({
-    //       weatherData: weatherData.data
-    //     })
-    //     console.log(this.state.weatherData);
-
-    // }) 
-
-
-
-
-    try {
-      let url = `http://localhost:3002/weather?city=${this.state.city}`
+   try {
+      let url = `http://localhost:3001/weather?city=${this.state.city}`
       let weatherData = await axios.get(url);
 
-      console.log(weatherData.data);
 
       this.setState({
         weatherData: weatherData.data,
+        isError: false,
       });
 
-      console.log(this.state);
+      
    
 
     } catch(error) {
-      console.log(error);
+      this.setState({
+        errorMessage: error.message,
+        isError: true,
+      })
+      
 
     }
   };
-  
- 
-    
 
   render() {
-
+    
     let mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`;
     
     let display = '';
     if (this.state.isError) {
+    
     display = <p>{this.state.errorMessage}</p>
     } else {
+      
     display = <ul id="cityLatLon">
+
                 <ul id="listedCity">City: {this.state.cityData.display_name}</ul>
                 <ul id="listedLon">Latitude: {this.state.cityData.lat}</ul>
                 <ul id="listedLat">Longitude: {this.state.cityData.lon}</ul>
               </ul>
     }
-    // console.log(this.state.weatherData);
+    
     let weatherDisplay = this.state.weatherData.map(weatherData => {
-      
       return (
       <Weather
-      date = {this.state.weatherData.date}
-      description = {this.state.weatherData.description}
+      weather = {this.state.weatherData}
       />)
-
     });
 
-    // console.log(weatherDisplay);
+    
     return (
       <><header id="topHeader">
         <h1 id='greeting' title="404">City Explorer</h1>
@@ -124,13 +110,14 @@ class Apps extends React.Component {
             </label>
             <button type="submit" id="inputIdBtn">Explore</button>
           </form>
+          
           <article>
             {display}
+            {this.state.isError ? <Alert id="alertDiv" className="alert" variant="danger" src="/src/caution.png"><Alert.Heading>Oh No You Have An Error!</Alert.Heading>{this.state.errorMsg}</Alert> : <p className="alert"></p>}
             <img src={mapUrl} alt={this.state.cityData.display_name} id="imageMain"/>
-           {this.state.isError ? <Alert id="alertDiv" className="alert" variant="danger"><Alert.Heading>Oh No There is an Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>}
           </article>
           <article>
-            <p> Weather Forecast for: {this.state.cityData.display_name}</p>
+            <p id="weatherForecastId"> Weather Forecast for: {this.state.cityData.display_name}</p>
             {weatherDisplay}
           </article>
           
@@ -152,8 +139,16 @@ export default Apps;
 
 
 
+ // axios.get(`http://localhost:3002/weather?city=${this.state.city}`)
+    //   .then(weatherData => {
+    //     console.log(weatherData);
+    //     this.setState({
+    //       weatherData: weatherData.data
+    //     })
+    //     console.log(this.state.weatherData);
 
-
+    // }) 
+// console.log(weatherDisplay); {this.state.showImages && }
 // handleOpenModal = () => {
 //   this.setState({
 //     showModal: true,

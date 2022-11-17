@@ -20,7 +20,7 @@
 
 ## Credit and Collaborations
 
-1. Worked with Cody on the first dataFlow image.
+1. Worked with Cody on the first dataFlow image. Help from Keyan than Ricardo for 2 & 3 on the wrrc. Help from Jason on some code I didn't use.
 2. TA help from Brandon and Justin
 
 Name of feature: Initial Website with return of city from api data

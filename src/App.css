@@ -237,11 +237,14 @@ body {
   border: 2px solid black;
   padding: 5px;
   margin-left: 5px;
+  border-radius: 15px;
 } */
 .alert {
   min-height: 200px;
   text-align: center;
   justify-content: center;
+  border-radius: 15px;
+  background-image: url(/src/caution.png);
 }
 /* .modal-content {
   align-items: center;
@@ -270,6 +273,7 @@ footer {
   justify-content: center;
 }
 main {
+  
   justify-content: center;
   align-items: center;
 }
@@ -282,4 +286,22 @@ main {
 #imageMain {
   background-image: url();
   border: 3px solid black;
+  border-radius: 15px;
+}
+#inputId {
+  height: 40px;
+  border-radius: 15px;
+  border: 2px solid black;
+}
+#cityLatLon {
+  font-weight: 600;
+  text-align: center;
+  margin-top: 10px;
+}
+#weatherForecastId {
+  font-weight: 600;
+  text-align: center;
+}
+#alertDiv {
+  background-image: url(/src/alert.jpg);
 }
