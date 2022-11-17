@@ -1,16 +1,23 @@
-
-import React from 'react';
-import axios from 'axios';
-import Alert from 'react-bootstrap/Alert';
-import 'bootstrap/dist/css/bootstrap.min.css';
+import React from "react";
 
 
+class Weather extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
 
+        }
+    }
 
+    render() {
+        return (
+            <>
+                {this.props.date}
+                {this.props.description}
+            </>
+        )
 
-
-handleWeather = async () => {
-    let url = `${process.env.REACT_APP_SERVER}/weather?city=${this.state.city}`;
-    let cityData = await axios.get(url);
-    console.log(cityData.data)
+    }
 }
+
+export default Weather;

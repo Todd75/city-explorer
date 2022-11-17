@@ -1,15 +1,9 @@
-import React, {CCardImage, CCardBody, CCardText, CCardTitle} from 'react';
-import CCard from 'react-bootstrap/Card';
-// import React, {CCardImage, CCardBody, CCardText, CCardTitle} from 'react-bootstrap';
+import React from 'react';
 import axios from 'axios';
-import Bootstrap from 'react-bootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert';
-// eslint-disable-next-line no-unused-vars
-import App from './App.css';
-// import Modal from 'react-bootstrap/Modal'
-import CButton from 'react-bootstrap/Button'
-
+import './App.css';
+import Weather from './components/Weather.js';
 
 class Apps extends React.Component {
   constructor(props) {
@@ -17,10 +11,11 @@ class Apps extends React.Component {
     this.state = {
       city: '',
       cityData: {},
-      forecast: [],
       errorMessage: '',
       isError: false,
-      showModal: false,
+      weatherData: [],
+    
+
     }
   }
 
@@ -28,10 +23,12 @@ class Apps extends React.Component {
 
   handleCityInput = (event) => {
     this.setState({
-      city: event.target.value
+      city: event.target.value,
+      
     });
+    console.log(this.state.city);
   };
-
+  
   handleCitySubmit = async (event) => {
 
     let url = `https://us1.locationiq.com/v1/search?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&q=${this.state.city}&format=json`;
@@ -42,8 +39,9 @@ class Apps extends React.Component {
       this.setState({
         cityData: locationInfo.data[0],
         isError: false,
-        showModal: true,
       });
+      this.handleWeather()
+      
 
     } catch (error) {
       this.setState({
@@ -52,15 +50,69 @@ class Apps extends React.Component {
       })
     }
   }
-  handleCloseModal = () => {
-    this.setState({
-      showModal: false,
-    })
-  }
+
+  handleWeather = async () => {
+    // axios.get(`http://localhost:3002/weather?city=${this.state.city}`)
+    //   .then(weatherData => {
+    //     console.log(weatherData);
+    //     this.setState({
+    //       weatherData: weatherData.data
+    //     })
+    //     console.log(this.state.weatherData);
+
+    // }) 
+
+
+
+
+    try {
+      let url = `http://localhost:3002/weather?city=${this.state.city}`
+      let weatherData = await axios.get(url);
+
+      console.log(weatherData.data);
+
+      this.setState({
+        weatherData: weatherData.data,
+      });
+
+      console.log(this.state);
+   
+
+    } catch(error) {
+      console.log(error);
+
+    }
+  };
+  
+ 
+    
+
   render() {
 
     let mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`;
+    
+    let display = '';
+    if (this.state.isError) {
+    display = <p>{this.state.errorMessage}</p>
+    } else {
+    display = <ul id="cityLatLon">
+                <ul id="listedCity">City: {this.state.cityData.display_name}</ul>
+                <ul id="listedLon">Latitude: {this.state.cityData.lat}</ul>
+                <ul id="listedLat">Longitude: {this.state.cityData.lon}</ul>
+              </ul>
+    }
+    // console.log(this.state.weatherData);
+    let weatherDisplay = this.state.weatherData.map(weatherData => {
+      
+      return (
+      <Weather
+      date = {this.state.weatherData.date}
+      description = {this.state.weatherData.description}
+      />)
 
+    });
+
+    // console.log(weatherDisplay);
     return (
       <><header id="topHeader">
         <h1 id='greeting' title="404">City Explorer</h1>
@@ -72,20 +124,16 @@ class Apps extends React.Component {
             </label>
             <button type="submit" id="inputIdBtn">Explore</button>
           </form>
-          {/* {display}
-          <img src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`} alt={this.state.cityData.display_name} /> */}
-          {this.state.isError ? <Alert id="alertDiv" className="alert" variant="danger"><Alert.Heading>Oh No There is an Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>}
-          <CCard style={{ width: '18rem' }}>
-            <CCardImage orientation='top' src={mapUrl} id='cardImageMap'/>
-            <CCardBody>
-              <CCardTitle>{this.state.cityData.display_name}</CCardTitle>
-              <CCardText>
-                Latitude: {this.state.cityData.lat}
-                Longitude: {this.state.cityData.lon}
-              </CCardText>
-              <CButton href="#">View Stuff</CButton>
-            </CCardBody>
-          </CCard>
+          <article>
+            {display}
+            <img src={mapUrl} alt={this.state.cityData.display_name} id="imageMain"/>
+           {this.state.isError ? <Alert id="alertDiv" className="alert" variant="danger"><Alert.Heading>Oh No There is an Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>}
+          </article>
+          <article>
+            <p> Weather Forecast for: {this.state.cityData.display_name}</p>
+            {weatherDisplay}
+          </article>
+          
         </main>
         <footer>
           <h5>&copy; TCW, 2022</h5>
@@ -93,32 +141,12 @@ class Apps extends React.Component {
       </>
 
     );
-  }
+  };
 };
 
 export default Apps;
 
 
-// {/* <Modal show={this.state.showModal} onHide={this.handleCloseModal} size="lg" className="modal" centered>
-//             <Modal.Header>
-//               <Modal.Title>
-//                 
-//               </Modal.Title>
-//             </Modal.Header>
-//             <Modal.Body id="modalbody">
-//               <div>
-//                 <img className="modaling"
-//                   src={mapUrl}
-//                   alt={this.state.city.name}
-//                 />
-//               </div>
-//               <p className="descriptionModal">Latitude: {this.state.cityData.lat}</p>
-//               <p className="descriptionModal">Longitude: {this.state.cityData.lon}</p>
-//             </Modal.Body>
-//             <Modal.Footer>
-//               <Button variant="primary" onClick={this.handleCloseModal}>Finished</Button>
-//             </Modal.Footer>
-//           </Modal> */}
 
 
 
@@ -126,6 +154,17 @@ export default Apps;
 
 
 
+// handleOpenModal = () => {
+//   this.setState({
+//     showModal: true,
+//   })
+// }
+
+// handleCloseModal = () => {
+//   this.setState({
+//     showModal: false,
+//   })
+// }
 
 // render() {
 //   return (
@@ -224,13 +263,36 @@ export default Apps;
   //   });
   // }
 
-  // let display = '';
-    // if (this.state.isError) {
-    //   display = <p>{this.state.errorMessage}</p>
-    // } else {
-    //   display = <ul id="cityLatLon">
-    //     <li id="listedCity">City: {this.state.cityData.display_name}</li>
-    //     <li id="listedLon">Latitude: {this.state.cityData.lat}</li>
-    //     <li id="listedLat">Longitude: {this.state.cityData.lon}</li>
-    //   </ul>
-    // }
+  
+
+    // <Card style={{ width: '25rem', }} id="cardID">
+    //         <Card.Img orientation='top' src={mapUrl} id='cardImageMap' />
+    //         <Card.Body>
+    //           <Card.Title>{this.state.cityData.display_name}</Card.Title>
+    //           <Card.Text>
+    //             <ul>Latitude: {this.state.cityData.lat}</ul>
+    //             <ul>Longitude: {this.state.cityData.lon}</ul>
+    //           </Card.Text>
+    //           <Button onClick={this.handleOpenModal}>View Stuff</Button>
+    //           <Modal show={this.state.showModal} onHide={this.handleCloseModal} size="lg" className="modal" centered>
+    //             <Modal.Header>
+    //               <Modal.Title>
+
+    //               </Modal.Title>
+    //             </Modal.Header>
+    //             <Modal.Body id="modalbody">
+    //               <div>
+    //                 <img className="modaling"
+    //                   src={seasonUrl}
+    //                   alt={this.state.city.name}
+    //                 />
+    //               </div>
+    //               <p className="descriptionModal">Forecast: {this.state.city.weatherData}</p>
+
+    //             </Modal.Body>
+    //             <Modal.Footer>
+    //               <Button variant="primary" onClick={this.handleCloseModal}>Finished</Button>
+    //             </Modal.Footer>
+    //           </Modal>
+    //         </Card.Body>
+    //       </Card>

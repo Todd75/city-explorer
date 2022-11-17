@@ -34,3 +34,5 @@ Finish time: 6:30
 Actual time needed to complete: about 4 hours
 
 ![dataFlow](src/dataflow.png)
+
+![Lab3](src/lab03.png)
