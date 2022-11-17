@@ -113,18 +113,18 @@ class Apps extends React.Component {
           
           <article>
             {display}
-            {this.state.isError ? <Alert id="alertDiv" className="alert" variant="danger" src="/src/caution.png"><Alert.Heading>Oh No You Have An Error!</Alert.Heading>{this.state.errorMsg}</Alert> : <p className="alert"></p>}
+            {this.state.isError ? <Alert id="alertDiv" className="alert" variant="danger"><Alert.Heading>Oh No You Have An Error!</Alert.Heading>{this.state.errorMsg}</Alert> : <p className="alert"></p>}
             <img src={mapUrl} alt={this.state.cityData.display_name} id="imageMain"/>
           </article>
           <article>
             <p id="weatherForecastId"> Weather Forecast for: {this.state.cityData.display_name}</p>
             {weatherDisplay}
           </article>
-          
-        </main>
-        <footer>
+          <footer>
           <h5>&copy; TCW, 2022</h5>
         </footer>
+        </main>
+        
       </>
 
     );
