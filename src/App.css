@@ -302,4 +302,6 @@ main {
 }
 #alertDiv {
   background-image: url(/src/alert.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
