@@ -1,5 +1,6 @@
 import React from "react";
 
+
 class Weather extends React.Component {
     constructor(props) {
       super(props);
@@ -13,16 +14,10 @@ class Weather extends React.Component {
       return (
        
         <>
-        <div>
-          {this.props.weatherData.map((day, idx) => (
-            <>
-            <div>
-                <p> Date: {day.date}</p>
-                <p>Daily Forecast: {day.description}</p>
-            </div>
-            </>
-          ))}
-           </div>
+          <h3>{this.props.city}</h3>
+          {this.props.date}
+          <p>{this.props.description}</p>
+          {this.props.fullDescription}
         </>
         
       )

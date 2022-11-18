@@ -1,7 +1,7 @@
 
 
 
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -29,28 +29,27 @@
 
 .App-link {
   color: #61dafb;
-}
+} */
 
-@keyframes App-logo-spin {
+/* @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
   }
   to {
     transform: rotate(360deg);
   }
-}
+} */
 body {
   background: linear-gradient(-45deg, #ff825c, #611c35, #2e5077, #c8ffbe);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-  height: 60vh;
+  height: 90vh;
   align-items: center;
   justify-content: space-evenly;
   text-align: center;
   align-content: center;
-  display: flex;
-  margin-left: auto;
-  margin-right: auto;
+  /* margin-left: auto;
+  margin-right: auto; */
 }
 
 @keyframes gradient {
@@ -64,11 +63,17 @@ body {
     background-position: 0% 50%;
   }
 }
-/* html, body {
-  height: 100%;
+#cityLatLon {
+  font-weight: 600;
 }
-
-body {
+#wholeCard {
+  width: 500px;
+  height: 500px;
+}
+.Card.Img {
+  max-width: 200px;
+}
+/* body {
   background-color: #ecf0f1;
   perspective: 4000;
   perspective-origin: 50% 0%;
@@ -211,26 +216,26 @@ body {
     transform: rotateX(70deg) translate3d(180px, 0px, -80px);
   }
 } */
-#root {
+/* #root {
   height: 550px;
 
-}
-#cityForm {
+} */
+/* #cityForm {
   text-align: center;
   padding-top: 50px;
-}
-#greeting {
+} */
+/* #greeting {
   text-align: center;
   padding-top: 1rem;
   height: 2rem;
   font-size: 90px;
   font-family: 'Permanent Marker', cursive;
-}
-#topHeader {
+} */
+/* #topHeader {
   height: 150px;
-}
+} */
 
-#inputIdBtn {
+/* #inputIdBtn {
   height: 40px;
   background-color: antiquewhite;
   font-weight: 500;
@@ -238,13 +243,13 @@ body {
   padding: 5px;
   margin-left: 5px;
   border-radius: 15px;
-}
-.alert {
+} */
+/* .alert {
   min-height: 200px;
   text-align: center;
   justify-content: center;
   border-radius: 15px;
-}
+} */
 /* .modal-content {
   align-items: center;
   background: linear-gradient(-45deg, #fbbaa7, #d79059, #5490d3, #c8ffbe);
@@ -264,19 +269,19 @@ body {
   margin-top: 6px;
   font-weight: 500;
 } */
-footer {
+/* footer {
   margin-top: 4rem;
   text-align: center;
-}
-#cardID {
+} */
+/* #cardID {
   justify-content: center;
 }
 main {
   
   justify-content: center;
   align-items: center;
-}
-.card-body {
+} */
+/* .card-body {
   background: linear-gradient(-45deg, #ff825c, #611c35, #2e5077, #c8ffbe);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
@@ -299,7 +304,9 @@ main {
 #weatherForecastId {
   font-weight: 600;
   text-align: center;
-}
-#alertDiv {
+} */
+/* #alertDiv {
   background-image: url(/src/alert.jpg);
-}
+  background-repeat: no-repeat;
+  background-size: cover;
+} */

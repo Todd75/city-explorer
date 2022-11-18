@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Alert from 'react-bootstrap/Alert';
 import './App.css';
 import Weather from './components/Weather.js';
+import Movie from './components/Movie.js';
 
 class Apps extends React.Component {
   constructor(props) {
@@ -14,17 +15,14 @@ class Apps extends React.Component {
       errorMessage: '',
       isError: false,
       weatherData: [],
-      showImages: false,
-    
-
+      showImage: false,
+      movieData: [],
     }
   }
   handleCityInput = (event) => {
     this.setState({
       city: event.target.value,
-      
     });
-    console.log(this.state.city);
   };
   
   handleCitySubmit = async (event) => {
@@ -33,16 +31,14 @@ class Apps extends React.Component {
     try {
       event.preventDefault();
       let locationInfo = await axios.get(url);
-
       this.setState({
         cityData: locationInfo.data[0],
         isError: false,
-      }, this.handleWeather);
+        showImage: true,
+      }, this.handleWeather); this.handleMovie();
       
-      
-
-    } catch (error) {
-      this.setState({
+      } catch (error) {
+        this.setState({
         errorMessage: error.message,
         isError: true
       })
@@ -51,79 +47,81 @@ class Apps extends React.Component {
 
   handleWeather = async (e) => {
    try {
-
       let url = await axios.get(`${process.env.REACT_APP_SERVER}/weather?queriedLat=${this.state.cityData.lat}&queriedLon=${this.state.cityData.lon}`);
       let weatherData = (url);
-
-
       this.setState({
         weatherData: weatherData.data,
         isError: false,
       });
-
-      
-   
-
-    } catch(error) {
+      } catch(error) {
       this.setState({
         errorMessage: error.message,
         isError: true,
       })
-      
-
     }
   };
+  handleMovie = async () => {
+    let movieURL = await axios.get(`${process.env.REACT_APP_SERVER}/movie?search=${this.state.city}`);
+    let movieData = (movieURL);
+    this.setState({
+      movieData: movieData.data
+    })
+    
+  }
 
   render() {
     
-    let mapUrl = `https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`;
-    
     let display = '';
     if (this.state.isError) {
-    
-    display = <p>{this.state.errorMessage}</p>
+    display = <p>{this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Oops! There is an Error! <p>{this.state.errorMsg}</p></Alert.Heading></Alert> : <p className="alert"></p>}</p>
     } else {
-      
     display = <ul id="cityLatLon">
-
                 <ul id="listedCity">City: {this.state.cityData.display_name}</ul>
                 <ul id="listedLon">Latitude: {this.state.cityData.lat}</ul>
                 <ul id="listedLat">Longitude: {this.state.cityData.lon}</ul>
               </ul>
     }
-    
-    
-
-    
+    let weatherDisplay = this.state.weatherData.map(weatherData => {
+      return <Weather
+      date = {weatherData.date}
+      description = {weatherData.fullDescription}
+      />
+    });
+  
     return (
-      <><header id="topHeader">
+      <>
         <h1 id='greeting' title="404">City Explorer</h1>
-      </header>
-        <main>
-          <form id="cityForm" onSubmit={this.handleCitySubmit}>
-            <label>
-              <input name='city' type='text' onChange={this.handleCityInput} placeholder="Please Search for a City" id="inputId" />
-            </label>
-            <button type="submit" id="inputIdBtn">Explore</button>
-          </form>
-          
-          <article>
-            {display}
-            {this.state.isError ? <Alert id="alertDiv" className="alert" variant="danger"><Alert.Heading>Oh No You Have An Error!</Alert.Heading>{this.state.errorMsg}</Alert> : <p className="alert"></p>}
-            <img src={mapUrl} alt={this.state.cityData.display_name} id="imageMain"/>
-          </article>
-          <article>
-            <p id="weatherForecastId"> Weather Forecast for: {this.state.cityData.display_name}</p>
-            <Weather weatherData={this.state.weatherData} />
-          </article>
-          <footer>
-          <h5>&copy; TCW, 2022</h5>
-        </footer>
-        </main>
-        
-      </>
+        <form onSubmit={this.handleCitySubmit}>
+          <label>
+            <input name='city' onChange={this.handleCityInput} placeholder="Please Pick a Location to Search For" />
+          </label>
+          <button type="submit">Explore!</button>
+        </form>
+        {this.state.isError ? <p>{this.state.errorMessage}</p> : <ul></ul>}
+        {display}
 
-    );
+        <img className ="image" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`} alt={this.state.cityData.display_name} />
+      
+        {/* {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Oops! There is an Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>} */}
+
+        <article id="weatherArticle">
+          <h3>Three Day Weather Forecast</h3>
+          {weatherDisplay}
+        </article>
+        <article id="movieArticle">
+          <h2>Movies</h2>
+          {this.state.movieData.length ? 
+        
+          <Movie
+          movies = {this.state.movieData}
+          city = {this.state.searchCity}
+          />
+          :
+         <>
+         </>}
+        </article>
+      </>
+    ); 
   };
 };
 
