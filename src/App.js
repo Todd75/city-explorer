@@ -37,8 +37,8 @@ class Apps extends React.Component {
       this.setState({
         cityData: locationInfo.data[0],
         isError: false,
-      });
-      this.handleWeather()
+      }, this.handleWeather);
+      
       
 
     } catch (error) {
@@ -49,10 +49,11 @@ class Apps extends React.Component {
     }
   }
 
-  handleWeather = async () => {
+  handleWeather = async (e) => {
    try {
-      let url = `http://localhost:3001/weather?city=${this.state.city}`
-      let weatherData = await axios.get(url);
+
+      let url = await axios.get(`${process.env.REACT_APP_SERVER}/weather?queriedLat=${this.state.cityData.lat}&queriedLon=${this.state.cityData.lon}`);
+      let weatherData = (url);
 
 
       this.setState({
@@ -91,12 +92,7 @@ class Apps extends React.Component {
               </ul>
     }
     
-    let weatherDisplay = this.state.weatherData.map(weatherData => {
-      return (
-      <Weather
-      weather = {this.state.weatherData}
-      />)
-    });
+    
 
     
     return (
@@ -118,7 +114,7 @@ class Apps extends React.Component {
           </article>
           <article>
             <p id="weatherForecastId"> Weather Forecast for: {this.state.cityData.display_name}</p>
-            {weatherDisplay}
+            <Weather weatherData={this.state.weatherData} />
           </article>
           <footer>
           <h5>&copy; TCW, 2022</h5>
@@ -138,7 +134,13 @@ export default Apps;
 
 
 
-
+// let weatherDisplay = this.state.weatherData.map(weatherData => {
+    //   return (
+    //   <Weather
+    //   date = {this.state.weatherData.date}
+    //   description = {this.state.weatherData.fullDescription}
+    //   />)
+    // });
  // axios.get(`http://localhost:3002/weather?city=${this.state.city}`)
     //   .then(weatherData => {
     //     console.log(weatherData);
