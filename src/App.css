@@ -1,55 +1,13 @@
 
-
-
-/* .App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-} */
-
-/* @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-} */
 body {
   background: linear-gradient(-45deg, #ff825c, #611c35, #2e5077, #c8ffbe);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-  height: 100vh;
   align-items: center;
   justify-content: center;
   text-align: center;
   align-content: center;
-  /* margin-left: auto;
-  margin-right: auto; */
+  
 }
 
 @keyframes gradient {
@@ -105,18 +63,44 @@ body {
 }
 #list-group-flush {
   float: right;
-  background-color: white;
+ 
 }
 div.card-body{
-  background-color: white;
+ 
+  background: linear-gradient(-45deg, #f7b9a7, #553943, #a1c5ee, #d7f8d1);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
   width: 25rem;
 }
 div.list-group-item{
+  background: linear-gradient(-45deg, #f7e0d9, #fbdce7, #e5f0fc, #e0f7dc);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
   font-size: 18px;
-  background-color: white;
+
   width: 150px;
   padding-top: 1.5rem;
 }
+.alert {
+  margin-top: 35px;
+  display: inline-block;
+  min-height: 100px;
+  max-width: 750px;
+  min-width: 600px;
+  text-align: center;
+  justify-content: center;
+  border-radius: 15px;
+  background-image: url(/src/alert.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+/* #mainHeader {
+  text-align: center;
+  padding-top: 1rem;
+  height: 2rem;
+  font-size: 90px;
+  font-family: 'Permanent Marker', cursive;
+} */
 /* body {
   background-color: #ecf0f1;
   perspective: 4000;
@@ -260,97 +244,7 @@ div.list-group-item{
     transform: rotateX(70deg) translate3d(180px, 0px, -80px);
   }
 } */
-/* #root {
-  height: 550px;
 
-} */
-/* #cityForm {
-  text-align: center;
-  padding-top: 50px;
-} */
-/* #greeting {
-  text-align: center;
-  padding-top: 1rem;
-  height: 2rem;
-  font-size: 90px;
-  font-family: 'Permanent Marker', cursive;
-} */
-/* #topHeader {
-  height: 150px;
-} */
+/*  */
 
-/* #inputIdBtn {
-  height: 40px;
-  background-color: antiquewhite;
-  font-weight: 500;
-  border: 2px solid black;
-  padding: 5px;
-  margin-left: 5px;
-  border-radius: 15px;
-} */
-/* .alert {
-  min-height: 200px;
-  text-align: center;
-  justify-content: center;
-  border-radius: 15px;
-} */
-/* .modal-content {
-  align-items: center;
-  background: linear-gradient(-45deg, #fbbaa7, #d79059, #5490d3, #c8ffbe);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
-  height: 80vh;
-  font-size: large;
-}
-.modal-header {
-  height: 60px;
-}
-.modaling {
-  border: 3px solid black;
-}
-.descriptionModal {
-  text-align: center;
-  margin-top: 6px;
-  font-weight: 500;
-} */
-/* footer {
-  margin-top: 4rem;
-  text-align: center;
-} */
-/* #cardID {
-  justify-content: center;
-}
-main {
-  
-  justify-content: center;
-  align-items: center;
-} */
-/* .card-body {
-  background: linear-gradient(-45deg, #ff825c, #611c35, #2e5077, #c8ffbe);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
-  color: white;
-}
-#imageMain {
-  border: 3px solid black;
-  border-radius: 15px;
-}
-#inputId {
-  height: 40px;
-  border-radius: 15px;
-  border: 2px solid black;
-}
-#cityLatLon {
-  font-weight: 600;
-  text-align: center;
-  margin-top: 10px;
-}
-#weatherForecastId {
-  font-weight: 600;
-  text-align: center;
-} */
-/* #alertDiv {
-  background-image: url(/src/alert.jpg);
-  background-repeat: no-repeat;
-  background-size: cover;
-} */
+
