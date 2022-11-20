@@ -20,8 +20,9 @@
 
 ## Credit and Collaborations
 
-1. Worked with Cody on the first dataFlow image. Help from Keyan than Ricardo for 2 & 3 on the wrrc. Help from Jason on some code I didn't use.
-2. TA help from Brandon and Justin
+1. Worked with Cody on the first dataFlow image. Help from Keyan than Ricardo for 2 & 3 on the wrrc. Help from Jason on some code I didn't use. Aubrey and Tracy for Lab09 and 10 respectively.
+
+2. TA help from Brandon, Justin, Tammy, Raul, and JB.
 
 Name of feature: Initial Website with return of city from api data
 
@@ -33,6 +34,13 @@ Finish time: 6:30
 
 Actual time needed to complete: about 4 hours
 
-![dataFlow](src/dataflow.png)
-
-![Lab3](src/lab03.png)
+Lab 06
+![Lab6](src/dataflow.png)
+Lab 07
+![Lab7](src/lab07.jpg)
+Lab 08
+![Lab8](src/lab03.png)
+Lab 09
+![Lab9](public/Aubrey-Todd-09.jpg)
+Lab 10
+![Lab10](public/lab10wrrc.png)
