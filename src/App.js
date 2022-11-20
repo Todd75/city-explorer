@@ -5,6 +5,8 @@ import Alert from 'react-bootstrap/Alert';
 import './App.css';
 import Weather from './components/Weather.js';
 import Movie from './components/Movie.js';
+import Footer from './components/Footer.js'
+import Header from './components/Header.js'
 
 class Apps extends React.Component {
   constructor(props) {
@@ -48,7 +50,6 @@ class Apps extends React.Component {
   handleWeather = async (e) => {
    try {
       let url = `${process.env.REACT_APP_SERVER}/weather?city=${this.state.city}&lon=${this.state.cityData.lon}&lat=${this.state.cityData.lat}`;
-      // let url = `${process.env.REACT_APP_SERVER}/weather?queriedLat=${this.state.cityData.lat}&queriedLon=${this.state.cityData.lon}`;
       let weatherData = await axios.get(url);
       this.setState({
         weatherData: weatherData.data,
@@ -74,13 +75,17 @@ class Apps extends React.Component {
     
     let display = '';
     if (this.state.isError) {
-    display = <p>{this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Oops! There is an Error! <p>{this.state.errorMsg}</p></Alert.Heading></Alert> : <p className="alert"></p>}</p>
+    display = <p id="alertPTag">
+                {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Oops! There is an Error! </Alert.Heading><p>{this.state.errorMessage}</p></Alert> : <p className="alert"></p>}
+              </p>
     } else {
-    display = <ul id="cityLatLon">
-                <ul id="listedCity">City: {this.state.cityData.display_name}</ul>
-                <ul id="listedLon">Latitude: {this.state.cityData.lat}</ul>
-                <ul id="listedLat">Longitude: {this.state.cityData.lon}</ul>
-              </ul>
+    display = <div id="divCityLatLon">
+                <ul id="cityLatLon">
+                  <ul id="listedCity">City: {this.state.cityData.display_name}</ul>
+                  <ul id="listedLon">Latitude: {this.state.cityData.lat}</ul>
+                  <ul id="listedLat">Longitude: {this.state.cityData.lon}</ul>
+                </ul>
+              </div>
     }
     let weatherDisplay = this.state.weatherData.map(weatherData => {
       return <Weather
@@ -91,20 +96,21 @@ class Apps extends React.Component {
   
     return (
       <>
-        <h1 id='greeting' title="404">City Explorer</h1>
+        <Header />
         <form onSubmit={this.handleCitySubmit}>
           <label>
             <input name='city' onChange={this.handleCityInput} placeholder="Please Pick a Location to Search For" />
           </label>
           <button type="submit">Explore!</button>
         </form>
-        {this.state.isError ? <p>{this.state.errorMessage}</p> : <ul></ul>}
-        {display}
-
-        <img className ="image" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`} alt={this.state.cityData.display_name} />
       
-        {/* {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Oops! There is an Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>} */}
 
+
+
+        <div>
+          {display}
+          <img className ="image" src={`https://maps.locationiq.com/v3/staticmap?key=${process.env.REACT_APP_LOCATIONIQ_API_KEY}&center=${this.state.cityData.lat},${this.state.cityData.lon}&zoom=15`} alt={this.state.cityData.display_name} />
+        </div>
         <article id="weatherArticle">
           <h3>Three Day Weather Forecast</h3>
           {weatherDisplay}
@@ -113,7 +119,7 @@ class Apps extends React.Component {
           <h2>Movies</h2>
           {this.state.movieData.length ? 
         
-          <Movie
+        <Movie
           movies = {this.state.movieData}
           city = {this.state.searchCity}
           />
@@ -121,7 +127,9 @@ class Apps extends React.Component {
          <>
          </>}
         </article>
+        <Footer/>
       </>
+      
     ); 
   };
 };
@@ -131,8 +139,8 @@ export default Apps;
 
 
 
-
-
+/* {this.state.isError ? <Alert className="alert" variant="danger"><Alert.Heading>Oops! There is an Error!</Alert.Heading><p>{this.state.errorMsg}</p></Alert> : <p className="alert"></p>} */
+// let url = `${process.env.REACT_APP_SERVER}/weather?queriedLat=${this.state.cityData.lat}&queriedLon=${this.state.cityData.lon}`;
 // let weatherDisplay = this.state.weatherData.map(weatherData => {
     //   return (
     //   <Weather

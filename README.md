@@ -22,7 +22,7 @@
 
 1. Worked with Cody on the first dataFlow image. Help from Keyan than Ricardo for 2 & 3 on the wrrc. Help from Jason on some code I didn't use. Aubrey and Tracy for Lab09 and 10 respectively.
 
-2. TA help from Brandon, Justin, Tammy, Raul, and JB.
+2. TA help from Brandon, Justin, Tammy, Matt, and JB.
 
 Name of feature: Initial Website with return of city from api data
 
