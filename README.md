@@ -5,18 +5,16 @@
 ## Version 1.0
 
 ## Overview
-<!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
+
 
 ## Getting Started
 
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+
 
 ## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
 
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
 
 ## Credit and Collaborations
 
@@ -33,6 +31,26 @@ Start time: 2:30
 Finish time: 6:30
 
 Actual time needed to complete: about 4 hours
+
+Name of feature: Asynchronous code, and APIs
+
+Estimate of time needed to complete: 5 hours
+
+Start time: 3pm
+
+Finish time: 9pm
+
+Actual time needed to complete: 6
+
+Name of feature: Custom Servers with Node and Express
+
+Estimate of time needed to complete: 5 hours
+
+Start time:  6pm
+
+Finish time: 12pm
+
+Actual time needed to complete: 6 hours
 
 Lab 06
 ![Lab6](src/dataflow.png)
