@@ -1,7 +1,17 @@
 import React from 'react';
-class Header extends React.Component{
- render() {  
-  return <h1 id="mainHeader">City Explorer</h1>
+import logo from '../logo1.jpg'
+
+
+class Header extends React.Component {
+  render() {
+    return (
+      <>
+     <h1 id="mainHeader">City Explorer</h1>
+     <div>
+       <img src={logo} alt="logo"></img>
+     </div>
+     </>
+    )
   }
 }
 
